@@ -2,11 +2,12 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+
 class Actor(nn.Module):
     def __init__(self, n_states, n_actions, hidden_dim_1, init_w=1e-4):
         super(Actor, self).__init__()
         self.linear1 = nn.Linear(n_states, hidden_dim_1)
-        self.linear2 = nn.Linear(hidden_dim_1, hidden_dim_1) 
+        self.linear2 = nn.Linear(hidden_dim_1, hidden_dim_1)
         self.linear4 = nn.Linear(hidden_dim_1, n_actions)
 
         self.linear4.weight.data.uniform_(-init_w, init_w)
@@ -16,10 +17,11 @@ class Actor(nn.Module):
         x = F.relu(self.linear1(x))
         x = F.relu(self.linear2(x))
         x = self.linear4(x)
-       
-        x = torch.tanh(x) 
+
+        x = torch.tanh(x)
         return x
-    
+
+
 class Actor_LSTM(nn.Module):
     def __init__(self, input_size, hidden_size, num_layers, output_size, init_w=1e-4):
         super(Actor_LSTM, self).__init__()
@@ -42,6 +44,5 @@ class Actor_LSTM(nn.Module):
             out = self.fc(out)
         else:
             out = self.fc(out[:, -1, :])
-        out = torch.tanh(out) 
+        out = torch.tanh(out)
         return out
-     

@@ -26,7 +26,7 @@ startPos = [0, 0, 1]
 startOrientation = p.getQuaternionFromEuler([0, 0, 0])
 
 urdf_path = os.path.join(os.path.dirname(__file__), "urdf/balancebot.urdf")
-#print(urdf_path)
+# print(urdf_path)
 boxId = p.loadURDF(urdf_path, startPos, startOrientation)
 
 # 按照位置和朝向重置机器人的位姿，由于我们之前已经初始化了机器人，所以此处加不加这句话没什么影响
